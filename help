@@ -1,0 +1,77 @@
+
+                          Reed Command Reference
+
+   h                       Display this reference
+   r                       Redraw the screen
+   q  :q                   Quit Reed
+
+ ------------------------------------------------------------------------------
+
+                                Navigation
+
+   Down arrow  e           Scroll down one line
+   Up arrow  y  k          Scroll up one line
+   d                       Scroll down one-half page
+   u                       Scroll up one-half page
+   Page Down  Space  z     Scroll down one page
+   Page Up  w  b           Scroll up one page
+   Home  <  ,  g           Go to the top of the file
+   End  >  .  G            Go to the end of the file
+   t                       Go to a specific line in the file
+   %                       Go to a certain percent in the file
+
+ ------------------------------------------------------------------------------
+
+                               Autoscrolling
+
+   s                       Set delay between lines (in tenths of a second)
+   +                       Increase the delay (slow down)
+   -                       Decrease the delay (speed up)
+   J                       Set jump (number of lines scrolled at a time)
+   p                       Pause or unpause autoscrolling
+   Enter                   Force a scroll
+
+ ------------------------------------------------------------------------------
+
+                                 Searching
+
+   /                       Search forward for a POSIX regular expression
+   ?                       Search backward for a POSIX regular expression
+   n                       Repeat the search in the same direction
+   N                       Repeat the search in the opposite direction
+   (  [  {                 Search for the matching bracket, going forward
+   )  ]  }                 Search for the matching bracket, going backward
+   F                       Clear the current search
+
+ ------------------------------------------------------------------------------
+
+                                 Bookmarks
+
+   B			   View all bookmarks
+   m                       Go to a bookmark
+   l                       Go to the bookmark named 'default'
+   '                       Go to a single-character bookmark
+   M                       Set a bookmark
+   "                       Set a single-character bookmark
+   L                       Set a bookmark named 'default'
+   D                       Delete a bookmark
+   C                       Clear all bookmarks for the file
+
+ ------------------------------------------------------------------------------
+
+                                  Buffers
+
+   :e                      Load a file
+   :n                      Go to the next buffer
+   :p                      Go to the previous buffer
+   :r                      Reload and/or respace the current buffer
+   :d                      Delete the current buffer
+   :o                      Open a filename displayed within the current buffer
+   R			   Rename the current buffer
+
+ ------------------------------------------------------------------------------
+
+                             External Commands
+
+   !                       Run a shell command
+   v                       Open an editor for the file

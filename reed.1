@@ -1,0 +1,168 @@
+.TH reed 1 "January 11th, 2002" SCOL "Autoscrolling Pager"
+.SH NAME
+reed \- an auto-scrolling text pager
+.SH SYNOPSIS
+\fBreed\fR [\fB-p\fR | \fB-u\fR] [\fB-b\fR | \fB-q\fR] [\fB-d\fR \fIdelay\fR] [\fB-j \fIjump\fR] \fIfilename\fR ...
+.br
+\fBreed [\fB-h\fR | \fB-v\fR]
+.SH DESCRIPTION
+Reed is a program originally written to automatically scroll large text
+files, such as etexts from Project Gutenberg (http://promo.net/pg or
+http://www.gutenberg.net), but its functionality has expanded to make it a
+decent default text pager, as well. Its feature set is minimal compared to
+pagers like \fBless\fR(1), but is large enough for most tasks.
+.SH OPTIONS
+.IP -d\ \fIdelay
+Specify the delay between lines. This is in approximately tenths of a second.
+.IP -j\ \fIjump
+Specify how many lines to jump at a time.
+.IP \fIfilename
+Specify the filename to load. Multiple filenames may be given.
+.IP -p/-u
+Start Reed paused or unpaused, respectively.
+.IP -b/-q
+Turn on or off audio cues, respectively.
+.IP -h
+Print a brief message describing command line options.
+.IP -v
+Print the version number and copyright information.
+.PP
+If the filename given is -, Reed will read from the standard input.
+.SH USAGE
+Reed has a selection of commands you can use within it. These commands are
+based on \fBless\fR(1)'s commands, as well as some other pagers. You can
+view this list of commands within Reed by pressing 'H'.
+.IP q
+Quit Reed.
+.IP s
+Set a new delay between lines. Higher numbers mean slower scrolling. This
+value can be a decimal number. On an infinitely fast computer, a delay of 1
+is equal to a pause of 1/10th of a second between lines. Adjust for your
+own, finitely fast (or slow), system. On a 500 MHz P3 system, a delay of
+1 is about 5 lines every second.
+.IP p
+Pause the scrolling. Pressing p again resumes it.
+.IP "+, -"
+Increase or decrease the delay (slow down or speed up), respectively.
+.IP J
+Set the number of lines Reed scrolls at a time. Setting this to a
+negative number will scroll backwards. Speed is calculated using this;
+scrolling happens every delay * jump intervals. By default this is 1.
+.IP t
+Go to a specific line in a file.
+.IP "/, ?"
+Search forward or backward (respectively) for a POSIX regexp.
+.IP "n, N"
+Repeat the previous search forward or backward.
+.IP F
+Forget (unhighlight) the previous search item.
+.IP "{, [, ("
+Search for the matching bracket, starting from the top of the screen and
+going down. This feature does not always work correctly.
+.IP "}, ], )"
+Search for the matching bracket, starting from the bottom of the screen and
+going up. This feature does not always work correctly.
+.IP "Up arrow, y, or k"
+Scroll up one line.
+.IP u
+Scroll up a half screen.
+.IP "Page Up, w, or b"
+Scroll up one whole screen.
+.IP "Down arrow, e, j"
+Scroll down a line.
+.IP d
+Scroll down a half screen.
+.IP "Page Down, Space, z"
+Scroll down a whole screen.
+.IP "Home, g, <, ,"
+Go to the top of a file.
+.IP "End, G, >, ."
+Go to the end of a file.
+.IP Enter
+Force a scroll. This is useful with a large jump setting if you read faster
+than it scrolls.
+.IP m
+Go to a bookmark. Bookmarks are file dependent; moving a file invalidates
+all bookmarks for it. A bookmark name may be up to 25 characters long and
+contain any characters except \\n (including control characters).
+.IP M
+Set a bookmark. See the previous comments about bookmarks for more
+information and caveats.
+.IP '
+Followed by a single character, this goes to a bookmark named that
+character. For example, 'a takes you to bookmark a.
+.IP """
+Followed by a single character, set a bookmark named that character. For
+example, "a sets bookmark a.
+.IP l
+Go to the bookmark named "default" in the current file.
+.IP L
+Set a bookmark named "default" in the current file.
+.IP D
+Delete a bookmark
+.IP C
+Clear all bookmarks in the current file.
+.IP B
+View all your bookmarks (by opening and displaying ~/.reed_bookmarks).
+.IP !
+Run a shell command.
+.IP %
+Go to a certain percent in the file. This is subject to slight rounding.
+.IP r
+Clear and redraw the screen.
+.IP v
+Start a text editor opened to the current file. Reed first tries $EDITOR,
+then $VISUAL, and defaults to /bin/ed.
+.IP a
+Toggle audio cues on or off.
+.IP R
+Rename the current buffer.
+.IP :n
+Go to the next buffer in the file list.
+.IP :p
+Go to the previous buffer in the file list.
+.IP :d
+Delete the current buffer from the file list.
+.IP :e
+Load (examine) a new file and add it to the file list.
+.IP :q
+Quit.
+.IP :r
+Reload the current file. This also re-spaces it to the new number of columns,
+so if you resize the terminal, use this.
+.IP :o
+If you are in a directory view or your bookmarks file, open the file at the
+top of the screen.
+.SH FILES
+.SS ~/.reed_bookmarks
+This file stores your bookmarks in the format of
+.PP
+<filename>	<linenumber>	<bookmark name>
+.PP
+The line number must be an integer. The bookmark name may have any characters
+in it, but must be under 25 characters long
+.SS ~/.reedrc
+This is Reed's resource file. Valid options are:
+.PP
+\fBdelay \fInumber\fR - Set the default delay between lines.
+.br
+\fBjump \fInumber\fR - Set the default number of lines to skip at a time.
+.br
+\fBbeep \fR[\fBon\fR|\fBoff\fR] - Set audio signals on or off. The default is
+on.
+.br
+\fBpaused \fR[\fBon\fR|\fBoff\fR] - Start Reed paused or unpaused. The default
+is paused.
+.SH SCRIPTS
+Reed includes two useful scripts by default.
+\fBbreed\fR (\fBb\fRefore \fBreed\fR) is a utility script for viewing files
+besides text files. A full list of files supported (and programs needed
+to view them) is available in the \fBbreed\fR(1) manual page.
+.PP
+The other script, \fBwrap\fR, word wraps text files.
+.SH AUTHOR
+The main author of Reed is Joe Wreschnig <piman@sacredchao.net>. However, the
+AUTHORS file included with Reed lists many more people that have helped
+with development.
+.SH SEE ALSO
+\fBwrap\fR(1), \fBbreed\fR(1)

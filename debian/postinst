@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+	update-alternatives --install /usr/bin/pager pager /usr/bin/reed 65 --slave /usr/share/man/man1/pager.1.gz pager.1.gz /usr/share/man/man1/reed.1.gz
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

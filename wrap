@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+# public domain
+# version 1.5
+
+use Text::Wrap;
+
+if (!$ARGV[0] || $ARGV[0] eq "-h" || $ARGV[0] eq "--help") {
+  print "wrap 1.5 - Word wrap files. Usage:\n wrap [filenames]\n";
+  exit(0);
+}
+
+foreach $i (@ARGV) {
+  if (!(-T $i)) {
+    print "This does not appear to be a text file! Really word wrap? [y/N] ";
+    chomp($foo = <STDIN>);
+    if ($foo ne "y" || $foo ne "Y") { next; }
+  }
+  if (-f "$i.wrap") {
+    print "$i.wrap found! Delete or move it before continuing.\n";
+  } elsif (!(-r $i)) {
+    print "$i does not exist. Skipping it...\n";
+  } else {
+    print "Wrapping $i... ";
+    open FOO, $i;
+    open BAR, ">$i.wrap";
+    foreach (<FOO>) { print BAR wrap("\n", "", $_); }
+    close BAR;
+    close FOO;
+    unlink $i;
+    rename "$i.wrap", $i;
+    print "Done.\n";
+  }
+}

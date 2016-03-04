@@ -1,0 +1,53 @@
+Reed 5.4 - An autoscrolling text pager
+
+About Reed
+----------
+Reed is a text pager I wrote for reading large files, such as full books
+(usually Project Gutenberg ones). It's based loosely off the excellent
+Palm DOC reader, CSpotRun. Anyone familiar with the DOS pager Smooth
+should have little trouble with the Reed interface, as well.
+
+I wrote it because I dislike having to manually page while I read.
+
+Compiling
+---------
+Reed 5.x uses the 'configures' build system, which is eerily similar to
+the GNU autoconf system, ostensibly.
+ $ ./configures && make && make install
+
+Full instructions are in INSTALL. Reed is known to compile and run on
+GNU/Linux systems.
+
+Using
+-----
+Please see the Reed man page. If Reed is properly installed, type
+ $ man reed
+
+If Reed is not properly installed, see above. Otherwise, from the Reed
+source directory,
+ $ man -l ./reed.1
+
+Included Scripts
+----------------
+Reed comes with a script called 'breed', which prepares a file for reed.
+It is recommended that you use breed instead of reed for most things. As of
+5.3, breed supports many kinds of files, including URLs, HTML, bzip2,
+gzip, arj, bzip, dpkg, doc, lha, rpm, tar, zip, pdb, and gpg/pgp encrypted.
+The advantage of using Breed over other generic-dispatcher scripts (such
+as zmore or lessfile) is that Breed will tell Reed the "right" filename,
+so bookmarks behave nicely.
+
+Reed also comes with a script called 'wrap' to word wrap files. It's a
+simple interface to the Perl Text::Wrap module.
+
+FAQ
+---
+Q. 'man 1 reed' doesn't bring up the manual page.
+A. You are using an old GNU/Linux (or other UNIX) system that does not
+   implement a part of the Filesystem Hierarchy Standard. Reed installs
+   manual pages into /usr/local/share/man or /usr/share/man, but old
+   distributions only look in /usr/local/man or /usr/man. To fix this,
+   run
+    # mkdir -p /usr/local/share/man/man1
+    # cp /usr/local/man/man1/{reed,breed}.1 /usr/local/share/man/man1
+     (or /usr/man/man1/      )

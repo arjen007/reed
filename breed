@@ -1,0 +1,104 @@
+#!/usr/bin/perl
+# Breed 5.4 - manages external viewers for Reed
+# Copyright (C)2001-2002 Joe Wreschnig <piman@sacredchao.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version. Read the COPYING file included with
+# this program for the full text of the GNU GPL.
+
+use Getopt::Std;
+use strict;
+
+my @wrap = ();
+my $program = "reed";
+my $file;
+
+my %opts; getopts("whvupbqd:j:", \%opts);
+
+if ($opts{'w'}) {
+ @wrap = ("|", "fold", "-w", "75", "-s");
+ delete $opts{'w'};
+}
+
+if ($ARGV[0] !~ m!://!) { # Not a URL
+ if (!-r $ARGV[0] && !(keys %opts)) {
+  print "breed: error: No valid filenames were found.\n";
+  exit 1;
+ }
+ my (@parts, @newparts);
+ if ($ARGV[0] !~ m!^/!) {
+  chomp(@parts = (split('/', `pwd`), split('/', $ARGV[0])));
+ } else {
+  @parts = split('/', $ARGV[0]);
+ }
+
+ foreach (@parts) {
+  if ($_ eq ".") {
+  } elsif ($_ ne "..") {
+   push (@newparts, $_);
+  } else { pop @newparts; }
+ }
+ $file = join('/', @newparts);
+} else { $file = $ARGV[0]; }
+
+$file =~ s/\\/\\\\/g;
+$file =~ s/\"/\\\"/g;
+
+my @opts;
+foreach (keys %opts) {
+ push @opts, "-$_";
+ if ($_ eq 'j' || $_ eq 'd') { push @opts, $opts{$_}; }
+}
+
+my @pipe = ('|', $program, @opts, '-f', $file, '-');
+
+if ($file =~ m!://! || $file =~ /\.s?html?$/i) {
+ run('lynx', '-dump', $file, @pipe);
+} elsif ($file =~ /\.tar\.bz2$/i) {
+ run('bunzip2', '-dc', $file, '|', 'tar', 'tvvf', '-', @pipe);
+} elsif ($file =~ /\.tar\.gz$/i) {
+ run('gunzip', '-dc', $file, '|', 'tar', 'tvvf', '-', @pipe);
+} elsif ($file =~ /\.gz$/i || $file =~ /\.z$/i) {
+ run("gunzip", "-dc", $file, @pipe);
+} elsif ($file =~ /\.lha$/i || $file =~ /\.lhz/i) {
+ run("lha", "v", "$file");
+} elsif ($file =~ /\.zip$/i || $file =~ /\.jar$/i) {
+ run("unzip", "-v", $file, @pipe);
+} elsif ($file =~ /\.arj$/i) {	run('unarj', 'l', $file, @pipe); }
+elsif ($file =~ /\.bz$/i) {	run("bunzip", '-c', $file, @pipe); }
+elsif ($file =~ /\.bz2$/i) {	run("bunzip2", '-dc', $file, @pipe); }
+elsif ($file =~ /\.deb$/i) { 	run("dpkg", "--info", $file, @pipe); }
+elsif ($file =~ /\.doc$/i) {	run("catdoc", $file, @wrap, @pipe); }
+elsif ($file =~ /\.ps$/i) {	run("ps2ascii", $file, @wrap, @pipe); }
+elsif ($file =~ /\.pdf$/i) {	run("pdftotext", $file, "-", @wrap, @pipe); }
+elsif ($file =~ /\.rpm$/i) {	run("rpm", "-qip", $file, @pipe); }
+elsif ($file =~ /\.tar$/i) {	run("tar", "tvvf", "$file", @pipe); }
+elsif ($file =~ /\.pdb$/i) {	run("doctotext", "$file", @wrap, @pipe); }
+elsif ($file =~ /\.gpg$/i || $file =~ /\.pgp$/i) {
+ my $fixed = $file;
+ $fixed =~ s!/!_!g;
+ run("gpg", "--decrypt", $file, @wrap, '>',
+     "/tmp/.reed.gnupg.$fixed.$ENV{USER}", ';', 'chmod','400',
+     "/tmp/.reed.gnupg.$fixed.$ENV{USER}", ';', 'reed', @opts, '-f', $file,
+     "/tmp/.reed.gnupg.$fixed.$ENV{USER}");
+ unlink("/tmp/.reed.gnupg.$fixed.$ENV{USER}");
+} elsif (@wrap) {
+ run("cat", $file, @wrap, @pipe);
+} else { run($program, @opts, $file); }
+
+sub run {
+ my $cline = $_[0];
+ chomp($cline = `which $cline`);
+ if (!$cline) {
+  print "breed: error: the required program, $_[0], is not installed.\n";
+  exit 1;
+ } else { shift; }
+
+ foreach (@_) {
+  if (/[^A-Za-z0-9_\-\`]/ && $_ !~ /^[;>|]/) { $cline .= " \"$_\""; }
+  else { $cline .= " $_"; }
+ }
+ system($cline);
+}

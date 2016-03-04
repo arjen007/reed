@@ -1,0 +1,25 @@
+all:
+	$(CC) -O2 -o reed reed.c filemode.c -lcurses
+
+debug:
+	$(CC) -o reed reed.c filemode.c -lcurses -Wall -g
+
+install:
+	install -d $(DESTDIR)PREFIX/bin
+	install -d $(DESTDIR)PREFIX/share/man/man1
+	install -D -m 755 -s reed $(DESTDIR)PREFIX/bin/reed
+	install -m 755 wrap breed $(DESTDIR)PREFIX/bin/
+	install -D -m 644 *.1 $(DESTDIR)PREFIX/share/man/man1/
+	install -D -m 644 help $(DESTDIR)PREFIX/share/reed/help
+
+clean:
+	rm -f reed
+
+distclean: clean
+	rm -f Makefile *~
+
+deb:
+	dpkg-buildpackage -rfakeroot
+
+debclean:
+	fakeroot debian/rules clean

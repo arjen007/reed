@@ -1,0 +1,16 @@
+Source: reed
+Section: text
+Priority: optional
+Maintainer: Joe Wreschnig <piman@sacredchao.net>
+Build-Depends-Indep: debhelper (>> 3.0.0)
+Build-Depends: libncurses-dev
+Standards-Version: 3.5.6
+
+Package: reed
+Architecture: any
+Depends: ${shlibs:Depends}, ${perl:Depends}
+Description: An autoscrolling text pager
+ Reed is a text pager with commands similar to less that automatically
+ scrolls text. You can change the speed at which it scrolls. Reed also
+ supports a number of other features, like bookmarks, searching, multiple
+ buffers, plus most standard pager features.

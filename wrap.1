@@ -1,0 +1,15 @@
+.TH wrap 1 "Aug 5th, 2000" SCOL "Word-wrap script"
+.SH NAME
+wrap \- word-wrap text files
+.SH SYNOPSIS
+\fBwrap\fR \fIfilename\fR ...
+.SH DESCRIPTION
+\fBwrap\fR will word-wrap a text file at a number of columns equal to
+the current width of your terminal. It can also word wrap binary files,
+which isn't a good thing. If it prompts you about a binary file, make
+sure you really want to word wrap it.
+.PP
+\fBwrap\fR depends on Text::Wrap, which is included with Perl 5.005
+and above.
+.SH AUTHOR
+Joe Wreschnig <piman@sacredchao.net>

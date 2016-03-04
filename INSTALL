@@ -1,0 +1,32 @@
+		Install Instructions
+		--------------------
+  These are generic installation instructions for the 'configures' build
+system. They were created for configures 1.3.
+
+The Basics:
+-----------
+	./configures && make && make install
+
+Options:
+--------
+  You can specify where you want the program installed via the -p or
+--prefix option, which will usually be /usr/local by default.
+
+	./configures --prefix=/usr
+	./configures -p /opt/program
+
+  By default, `configures' checks $PATH for programs. If you have a
+program installed elsewhere, you can use the -b or --bindir option.
+
+	./configures -b /home/piman/custom/bin
+
+  You can do the same using -l or --libdir for libraries (/lib, /usr/lib,
+anything in /etc/ld.so.conf, and $LD_LIBRARY_PATH), or -d and --headdir for
+header files (/usr/include, /usr/X11R6/include, and /usr/local/include).
+
+  -m or --moddir is available for alternate locations for Perl modules.
+
+  configures also supports --help/-h and --version/-v.
+
+  If configures still won't generate a Makefile, use -f (or --force) to
+force it to.

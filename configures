@@ -1,0 +1,117 @@
+#!/bin/sh
+# This script is in the public domain
+# configure script for small programs
+
+NF="true"		# Do not force install ('not force')
+PREFIX="/usr/local"
+
+OPTS=`getopt -n configure -o v,p:,h,f,b:,l:,m:,d: --longoptions=prefix:,version,help,force,bindir:,libdir:,moddir:,headdir: -- $@`
+if [ $? != 0 ] ; then exit 1; fi
+eval set -- "$OPTS"
+
+while true ; do
+ case "$1" in
+  -p|--prefix) PREFIX="$2"; shift 2;;
+  -b|--bindir) BINDIR="$2"; shift 2;;
+  -l|--libdir) LIBDIR="$2"; shift 2;;
+  -m|--moddir) MODDIR="$2"; shift 2;;
+  -d|--headdir) HEADDIR="$2"; shift 2;;
+  -v|--version)
+   echo "configures 1.3, by Joe Wreschnig <piman@sacredchao.net>"
+   echo "Placed in the public domain."; exit;;
+  -h|--help)
+   echo " --version	Print the version"
+   echo " --help		Print this message"
+   echo " --prefix	Set the install prefix"
+   echo " -f, --force	Create a Makefile even if the dependency detection fails";
+   exit;;
+  -f|--force) NF=""; shift;;
+  --) shift ; break;;
+ esac
+done
+
+. ./cfg.data
+
+if test ! -r ./Makefile.in; then
+ echo "There is no Makefile.in file, stopping configuration."
+ exit 1
+fi
+
+echo "This script will attempt to look for files needed by $PROGNAME $VERSION."
+
+test "$PROGRAMS" && echo "Programs:"
+for I in $PROGRAMS; do
+ echo -n "  Looking for $I... "
+ for J in `echo $PATH | sed 's/:/ /g'` $BINDIR; do
+  F="0"
+  if test -x "$J/$I"; then
+   echo "found."
+   F="1"
+   break
+  fi
+ done
+ if test $F = "0"; then echo "not found."; test $NF && exit 1; fi
+done
+
+test "$LIBS" && echo "Libraries:"
+for I in $LIBS; do
+ echo -n "  Looking for lib$I... "
+ for J in `echo $LD_LIBRARY_PATH | sed 's/:/ /g'` `test -x /etc/ld.so.conf && cat /etc/ld.so.conf` /lib /usr/lib /usr/local/lib $LIBDIR; do
+  F="0"
+  if test -r "$J/lib$I.so" || test -r "$J/lib$I.a"; then
+   echo "found."
+   F="1"
+   break
+  fi
+ done
+ if test $F = "0"; then echo "not found."; test $NF && exit 1; fi
+done
+
+test "$HEADERS" && echo "Headers:"
+for I in $HEADERS; do
+ echo -n "  Looking for $I... "
+ for J in /usr/include /usr/X11R6/include /usr/local/include $INCDIR; do
+  F="0" # Found
+  if test -r "$J/$I"; then
+   echo "found."
+   F="1"
+   break
+  fi
+ done
+ if test $F = "0"; then echo "not found."; test $NF && exit 1; fi
+done
+
+test "$PM" && echo "Perl modules:"
+for I in $PM; do
+ echo -n "  Looking for $I... "
+ for J in `perl -e "print join ' ', @INC"` $PERLDIR; do
+  F="0"
+  if test -r "$J/$I.pm"; then
+   echo "found."
+   F="1"
+   break
+  fi
+ done
+ if test $F = "0"; then echo "not found."; test $NF && exit 1; fi
+done
+
+test "$OTHER" && echo "Other files (will take a long time to find):"
+for I in $OTHER; do
+ echo -n "  Looking for $I... "
+ F="0"
+ if locate "$I" > /dev/null; then
+  echo "found."
+  F="1"
+ fi
+ if test $F = "0"; then echo "not found."; test $NF && exit 1; fi
+done
+
+echo; echo -n "Creating Makefile(s) to install into $PREFIX... "
+for I in $DIRS .; do
+ J=`pwd`
+ cd $I && sed "s!PREFIX!$PREFIX!g" < Makefile.in > Makefile && cd $J
+done
+
+echo "Done."
+
+echo "Type \`make; su -c \"make install\"' to compile and install $PROGNAME."

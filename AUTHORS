@@ -1,0 +1,39 @@
+Main Developer
+--------------
+Reed is primarily written by Joe Wreschnig, who can be contacted at
+piman@sacredchao.net. All bugs reports, feature requests, etc, can go
+to him.
+
+Contributors
+------------
+Much of the code for viewing directories was borrowed from the GNU
+fileutils package by Richard Stallman and David MacKenzie. This includes
+filemode.h, filemode.c, and the getuser()/getgroup() functions in reed.c.
+
+Ben Zeigler wrote the original code for searching for matching brackets.
+
+Brett Smith wrote the command summary that the 'H' command displays.
+
+Old Contributors
+----------------
+The following people contributed to Reed prior to 5.0. None of their code
+survived the rewrite, but their help was appreciated in earlier versions.
+
+David Koppenhofer	Francois Harvey		Max Byrd
+Michael Yount		Peter B. Wilson		Sean Perry
+
+Advice and bug reports:
+-----------------------
+Michiel Buddingh'		Christian Perle
+Owen Cameron			marc
+Gunnar Isaksson			Ross Campbell
+Brenton Stone			Joel Eriksson
+Pierre Foucart			Raúl Núñez de Arenas Coronado
+Jennifer Poole			Bonnie Hess
+Utilisateur			Imamichi
+Richard Zidlicky		Albert Reiner
+
+Miscellaneous Thanks
+--------------------
+Project Gutenberg (http://promo.net/pg and http://www.gutenberg.net) for
+providing the motivation for this project, and 1600+ books for free.

@@ -1,0 +1,51 @@
+.TH reed 1 "February 3rd, 2002" SCOL "Autoscrolling Pager"
+.SH NAME
+breed \- prepare files for reed
+.SH SYNOPSIS
+\fBbreed\fR \fI[options] [filename]\fR
+.br
+.SH DESCRIPTION
+breed prepares files for viewing by reed. Although the most common use is
+viewing compressed files (.gz, .bz2, etc), it also supports many other
+file formats. It can only take one filename as a parameter, however.
+.PP
+breed has some advantages over other generic viewer programs (like
+lessfile or zmore) because it can tell Reed the "real" filename so bookmarks
+act correctly.
+.SH OPTIONS
+Breed has the same options as Reed. In addition, if you have /usr/bin/fold
+installed, Breed can word wrap text automatically, using the -w parameter.
+.SH USAGE
+breed supports all command line options reed does, although it only allows
+one filename.
+.SH FILES
+.IP ".html, .htm, .shtml"
+Uses Lynx. breed is also capable of using Lynx to download remote files, for
+example
+.br
+\fBbreed http://www.sacredchao.net/software/reed/\fR
+.IP ".bz2, .bz, .gz, .z"
+Uses bunzip2, bunzip, and gunzip, respectively. Uncompresses the file and
+displays it. Note that the behaviour is different for .tar.gz or .tar.bz2
+files.
+.IP ".tar, .tar.gz (.tgz), .tar.bz2 (.tb2), .tar.z"
+Displays a listing of files in the archive.
+.IP ".arj, .zip (.jar), .lha, .lhz"
+Display a listing of the files in the archive. Requires unarj, unzip,
+and lha respectively.
+.IP ".rpm, .deb"
+Display information about the package. Requires rpm and dpkg.
+.IP ".pdf, .ps, .doc"
+Display an approximation of the document. Requires pdftotext, ps2ascii, and
+catdoc, respectively.
+.IP .pdb
+View a Palm DOC file. Requires doctotext, from the Pyrite Publisher package.
+.IP .gpg
+Decrypt a file and display the contents. Requires gpg.
+.SH BUGS
+Decrypting .gpg files creates an intermediate file with the plaintext
+contents. This file is deleted when you exit Reed, and is mode 0400, however,
+the file is still plaintext on your hard drive for as long as you're reading
+it (and probably longer still in your RAM).
+.SH SEE ALSO
+\fBreed\fR(1), \fBfold\fR(1)

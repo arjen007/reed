@@ -1,0 +1,18 @@
+Reed only highlights the first search match on each line. Reed also doesn't
+highlight search matches on lines with bold or underlining. Both of these
+are because of my limited understanding of the POSIX regexp interface.
+Patches (or references to learn more besides the GNU libc documentation)
+would be greatly appreciated.
+
+Because Reed counts a wrapped line as a new line number, using 'v' takes you
+to the wrong line if there's a wrapped line in the file.
+
+configures hasn't really been tested under BSD, ever. I'd love to know if
+it works there, and if not, what I can do to fix it.
+
+I'd also like to know how Reed performs in non-US locales/languages. I
+know it used to work for Japanese, but I don't know if that survived 5.0.
+Also if someone wants to gettextize it, that would rule, too.
+reload the one you already have open.
+
+Mail more bugs to piman@sacredchao.net.

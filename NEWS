@@ -1,0 +1,88 @@
+5.4 - November 8th, 2002
+ * L and l can be used to set/go to a default bookmark. I think I wrote this feature around 5.2 actually, but didn't document it.
+ * You can scroll past the end of the file (into blank space). This is important because...
+ * :o will look for a filename on the current top line and try to open it, going to the bookmark if you're in your bookmarks file.
+ * :l will give you a list of buffers.
+ * Of course, bug fixes and code cleanups.
+
+5.3 - April 12th, 2002
+ * Filenames are reverse truncated in the status bar if they're too long.
+ * Updated the build system.
+ * Breed supports -w to word wrap files, if possible/desirable.
+ * Typos fixed.
+
+5.2 - February 23rd, 2002
+ * ,, ., and r work as documented.
+ * :r reloads a file if it was on disk (and not a stream).
+ * Naming the buffer based on the manual page name is now more accurate.
+ * URLs load in breed again.
+ * Breed doesn't make a file named '-' anymore when reading postscript.
+
+5.1 - January 21st, 2002
+ * Don't segfault if ~/.reedrc is missing.
+ * Support Postscript files in Breed.
+ * 'H' brings up an in-program cheat sheet.
+ * Bookmarks are evenly spaced.
+ * Include sys/dir.h for Solaris.
+ * Some bugs due to poor quoting in Breed have been fixed.
+
+5.0 - January 13th, 2002
+ * Reed 5.0 is a complete rewrite. Innumerable were bugs fixed.
+ * Searching (and highlighting) is now file-specific.
+ * v (invoke an editor) now goes to the current line within the editor.
+ * The bookmark file format has changed incompatibly once again. The included script, fix_bookmarks.pl, will update your bookmarks for you if you run it.
+ * Bookmarks can now all be viewed with the 'B' command.
+ * 'fake' filenames can be changed by the 'R' command.
+ * /etc/reedrc is no longer checked.
+ * Files are now formatted only when they are displayed.
+ * Reed automatically reads from stdin if no filename is given and data is waiting.
+ * Use more less-compatible commands (j is now J, j is scroll down, and g and G work as expected).
+ * Breed has been rewritten.
+
+4.6 - February 20th, 2001
+ * PDF support in Breed.
+ * Fixed several crashes.
+
+4.5 - December 7th, 2000
+ * Improved 'wrap' script.
+ * { } ( ) [ ] commands.
+ * Bug fixes.
+ * Repeat search command.
+ * Likely the last version.
+
+4.4 - November 21st, 2000
+ * Search highlighting.
+ * Multiple buffers.
+ * Beeping configurable.
+ * Lots of bugs fixed.
+
+4.2 - September 24th, 2000
+ * Much, much faster loading time and response time.
+ * Line numbers based off top line, not bottom line.
+ * Quick bookmarks gone, replaced by ' and " (more less-y and flexible).
+ * %, r, v, !.
+ * ~ expands to $HOME.
+
+4.1 - July 31st, 2000
+ * Short file bug fixed.
+ * New man page for wrap.
+ * Much improved directory mode (reports correct owners :).
+ * Bold and underline attributes.
+ * R, C, D commands.
+
+4.0 - July 8th, 2000
+ * breed for reading compressed and remote files..
+ * 1-9/!-( quick bookmarks.
+ * "Speed" is replaced by the more intuitive "Delay".
+ * Due to the above, the meaning of - and + have been changed.
+ * Bugs fixed.
+
+3.3 - July 6th, 2000
+ * `wrap' script will word-wrap text files
+ * Bookmark file format changed incompatibly.
+ * Typoes in all the docmentations we're fixed.
+
+3.2 - July 4th, 2000
+ * Scroll backwards again (broke it in 3.1).
+ * Much better status bar.
+ * Fractional speeds.

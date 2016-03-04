@@ -1,0 +1,123 @@
+reed (5.4) unstable; urgency=low
+
+  * New upstream release.
+  * Update control file to a sane version of policy.
+  * Previous entry should've been "as a slave for reed".
+  * Make a Debian-native package.
+  * Remove a lot of cruft.
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Mon, 23 Sep 2002 21:37:55 -0500
+
+reed (5.3-1) unstable; urgency=low
+
+  * new upstream release.
+  * install reed.1.gz as a slave for reed.1.gz.
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Fri, 12 Apr 2002 16:01:21 -0500
+
+reed (5.1-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Mon, 21 Jan 2002 14:29:51 -0600
+
+reed (5.0-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Tue, 15 Jan 2002 00:31:18 -0600
+
+reed (4.6-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Tue, 20 Feb 2001 18:24:22 -0600
+
+reed (4.5-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Thu,  7 Dec 2000 17:05:16 -0600
+
+reed (4.4-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Tue, 21 Nov 2000 16:51:50 -0600
+
+reed (4.3-1) unstable; urgency=low
+
+  * New upstream release
+  * No more menu entry
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Tue, 21 Nov 2000 16:51:19 -0600
+
+reed (4.2-1) unstable; urgency=low
+
+  * New upstream relesae
+  * Pretentiously install reed above more
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Sun, 27 Aug 2000 13:06:07 -0500
+
+reed (4.1-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Joe Wreschnig <piman@sacredchao.net>  Mon, 31 Jul 2000 11:59:59 -0500
+
+reed (4.0-1) unstable; urgency=low
+
+  * Install breed at priority 40 (below less and more, above w3m)
+  * New upstream version
+
+ -- Joe Wreschnig <piman@pfnet.org>  Sat,  8 Jul 2000 21:19:35 -0500
+
+reed (3.3-2) unstable; urgency=low
+
+  * "New" upstream version
+
+ -- Joe Wreschnig <piman@pfnet.org>  Thu,  6 Jul 2000 15:15:45 -0500
+
+reed (3.3-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Joe Wreschnig <piman@pfnet.org>  Thu,  6 Jul 2000 13:50:05 -0500
+
+reed (3.2-1) unstable; urgency=low
+
+  * New upstream version
+  * Install reed as a low-priority pager
+
+ -- Joe Wreschnig <piman@pfnet.org>  Tue,  4 Jul 2000 00:15:04 -0500
+
+reed (3.1-2) unstable; urgency=low
+
+  * Fixed placement of reed.1 and the location of the GPL
+  * Removed INSTALL from the package, since it's generic
+
+ -- Joe Wreschnig <piman@pfnet.org>  Tue, 27 Jun 2000 11:41:31 -0500
+
+reed (3.1-1) unstable; urgency=low
+
+  * New upstream version finalized
+
+ -- Joe Wreschnig <piman@pfnet.org>  Mon, 26 Jun 2000 03:07:02 -0500
+
+reed (3.1-0.1) unstable; urgency=low
+
+  * Test of a new upstream version
+
+ -- Joe Wreschnig <piman@pfnet.org>  Sun, 25 Jun 2000 20:21:00 -0500
+
+reed (3.0-2) unstable; urgency=low
+
+  * Fixed a bug in the menu placement
+
+ -- Joe Wreschnig <piman@pfnet.org>  Sat, 17 Jun 2000 15:39:42 -0500
+
+reed (3.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Joe Wreschnig <piman@pfnet.org>  Thu,  8 Jun 2000 01:38:12 -0500
